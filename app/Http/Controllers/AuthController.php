@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -60,5 +63,33 @@ class AuthController extends Controller
 
         return response()->json(["message" => "Sesion Cerrada"], 200);
 
+    }
+
+
+    public function resetPassword(Request $request){
+
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+
+        /*$token = Str::random(64);
+
+        $dest = $request->email;
+
+        Mail::send('resetP', ['token', $token], function ($message) use ($dest) {
+            $message->to($dest);
+            $message->subject('Esto esta rico');
+        });
+
+        return response()->json(["message" => "Enviamos un correo"]);*/
+
+        $status = Password::sendResetLink($request->only('email'));
+
+        if ($status == Password::RESET_LINK_SENT) {
+            return ["status" => __($status)];
+        }
+
+        
     }
 }

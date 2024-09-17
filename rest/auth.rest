@@ -32,3 +32,13 @@ Authorization: Bearer 2|kU6dms6Iv1vESvVNilznIhft3KVoXmCvXPn0wLSl262535fa
 POST http://127.0.0.1:8000/api/v1/auth/logout
 Accept: application/json
 Authorization: Bearer 2|kU6dms6Iv1vESvVNilznIhft3KVoXmCvXPn0wLSl262535fa
+
+
+### Envio de correos
+POST http://127.0.0.1:8000/api/v1/auth/reset-password
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "jav@gmail.com"
+}

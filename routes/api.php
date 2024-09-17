@@ -18,3 +18,5 @@ Route::prefix('/v1/auth')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
     });
 });
+
+Route::post('/v1/auth/reset-password', [AuthController::class, 'resetPassword']);
